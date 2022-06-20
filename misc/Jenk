@@ -15,15 +15,14 @@ node {
        sh 'npm test'
      }
    }
-   stage('docker build/push') {
-     docker.withRegistry('https://index.docker.io/v2/', 'dockerhub') {
+   stage('docker build/push')  {
        echo "Running ${VERSION} on ${env.JENKINS_URL}"
             git branch: "${BRANCH}",
             echo "for branch ${env.BRANCH_NAME}"
             sh "sudo docker build -t ${NAME}:${VERSION} ."
-            // sh "docker login -u rganeshsharma2489 -p arsenalg24 docker.io ."
+            sh "docker login -u rganeshsharma2489 -p arsenalg24 docker.io ."
             // sh "docker tag ${NAME}:latest ${IMAGE_REPO}/${NAME}:${VERSION}"
             sh "sudo docker push ${IMAGE}"
      }
-   }
+   
 }

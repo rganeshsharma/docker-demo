@@ -1,9 +1,8 @@
 node {
    def version_id
    stage('Preparation') {
-     checkout scm
-     sh "git rev-parse --short HEAD > .git/commit-id"                        
-     version_id = "${env.BUILD_ID}"
+     checkout scm                       
+     version_id = "${env.BUILD_NUMBER}"
    }
    stage('test') {
      nodejs(nodeJSInstallationName: 'nodejs') {

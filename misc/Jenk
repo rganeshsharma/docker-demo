@@ -13,8 +13,7 @@ node {
    }
    stage('docker build/push') {
      docker.withRegistry("https://index.docker.io/v2/", "dockerhub") {
-       sh 'docker build -t rganeshsharma2489/docker-example .'
-       sh 'docker tag rganeshsharma2489/docker-example rganeshsharma2489/docker-example:${env.BUILD_NUMBER}'
+       sh 'docker build -t rganeshsharma2489/docker-example:${env.BUILD_NUMBER} .'
        sh 'docker push rganeshsharma2489/docker-example:${env.BUILD_NUMBER}'
 
      }

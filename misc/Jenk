@@ -21,6 +21,7 @@ node {
             git branch: "${BRANCH}",
             echo "for branch ${env.BRANCH_NAME}"
             sh "docker build -t ${NAME} ."
+            sh "docker login -u rganeshsharma2489 -p arsenalg24 docker.io ."
             sh "docker tag ${NAME}:latest ${IMAGE_REPO}/${NAME}:${VERSION}"
      }
    }

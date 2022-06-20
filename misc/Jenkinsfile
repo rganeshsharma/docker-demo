@@ -3,7 +3,7 @@ node {
    stage('Preparation') {
      checkout scm
      sh "git rev-parse --short HEAD > .git/commit-id"                        
-     version_id = "${env.BUILD_ID}-${env.GIT_COMMIT}"
+     version_id = "${env.BUILD_ID}"
    }
    stage('test') {
      nodejs(nodeJSInstallationName: 'nodejs') {

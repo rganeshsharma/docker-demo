@@ -1,7 +1,7 @@
 node {
    environment { 
-   NAME = "yoda"
-   VERSION = "${env.BUILD_ID}"
+   NAME = "rganeshsharma2489/docker-example"
+   VERSION = "${env.BUILD_NUMBER}"
    IMAGE = "${NAME}:${VERSION}"
 }
    def version_id
@@ -20,9 +20,10 @@ node {
        echo "Running ${VERSION} on ${env.JENKINS_URL}"
             git branch: "${BRANCH}",
             echo "for branch ${env.BRANCH_NAME}"
-            sh "docker build -t ${NAME} ."
-            sh "docker login -u rganeshsharma2489 -p arsenalg24 docker.io ."
-            sh "docker tag ${NAME}:latest ${IMAGE_REPO}/${NAME}:${VERSION}"
+            sh "docker build -t ${NAME}:${VERSION} ."
+            // sh "docker login -u rganeshsharma2489 -p arsenalg24 docker.io ."
+            // sh "docker tag ${NAME}:latest ${IMAGE_REPO}/${NAME}:${VERSION}"
+            sh "docker push ${IMAGE}"
      }
    }
 }

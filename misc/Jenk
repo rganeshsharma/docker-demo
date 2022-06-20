@@ -1,9 +1,5 @@
+
 node {
-   environment { 
-   NAME = "rganeshsharma2489/docker-example"
-   VERSION = "${env.BUILD_NUMBER}"
-   IMAGE = "${NAME}:${VERSION}"
-}
    def version_id
    stage('Preparation') {
      checkout scm                       
@@ -15,14 +11,12 @@ node {
        sh 'npm test'
      }
    }
-   stage('docker build/push')  {
-       echo "Running ${VERSION} on ${env.JENKINS_URL}"
-            git branch: "${BRANCH}",
-            echo "for branch ${env.BRANCH_NAME}"
-            sh "sudo docker build -t ${NAME}:${VERSION} ."
-            sh "docker login -u rganeshsharma2489 -p arsenalg24 docker.io ."
-            // sh "docker tag ${NAME}:latest ${IMAGE_REPO}/${NAME}:${VERSION}"
-            sh "sudo docker push ${IMAGE}"
+   stage('docker build/push') {
+     docker.withRegistry("https://index.docker.io/v2/", "dockerhub") {
+       sh 'docker build -t rganeshsharma2489/docker-example .'
+       sh 'docker tag rganeshsharma2489/docker-example rganeshsharma2489/docker-example:${env.BUILD_NUMBER}'
+       sh 'docker push rganeshsharma2489/docker-example:${env.BUILD_NUMBER}'
+
      }
-   
+   }
 }

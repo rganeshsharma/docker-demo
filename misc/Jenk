@@ -9,7 +9,7 @@ pipeline {
     stage('Cloning Git') {
       steps {
         git([url: 'https://github.com/rganeshsharma/docker-demo.git', branch: 'master')
-
+       }
       }
     }
     stage('Building image') {
